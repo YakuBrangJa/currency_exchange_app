@@ -1,0 +1,9 @@
+.HomeHeader {
+  margin: 3rem auto;
+}
+
+.HomeHeader_h1 {
+  color: var(--gray-500);
+  font-size: 2rem;
+  margin: auto;
+}
