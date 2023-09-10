@@ -1,0 +1,37 @@
+.TableBodyContainer {
+}
+
+.TableBodyHeader {
+  border-bottom: 0.5px solid var(--gray-400);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem 1rem 0.3rem;
+  font-weight: 600;
+}
+
+.TableBodyListContainer {
+  max-height: 30rem;
+  border-bottom: 0.5px solid var(--gray-400);
+}
+
+.TableBodyListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  padding: 0 0.5rem 0 0.5rem;
+  /* border-bottom: 0.5px solid var(--gray-300); */
+}
+
+.TableBodyListItem:nth-child(odd) {
+  background-color: var(--gray-100);
+}
+
+.TableBodyListItem > .currencyLabel .unit {
+  color: var(--gray-800);
+}
+
+.TableBodyListItem > .currencyLabel .fullLabel {
+  color: var(--gray-500);
+}

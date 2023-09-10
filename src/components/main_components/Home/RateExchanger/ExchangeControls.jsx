@@ -5,6 +5,7 @@ import useGetExchangeRateData from "../../../../hooks/useGetExchangeRateData";
 import useGetCurrencyList from "../../../../hooks/useGetCurrencyList";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedSource, setSelectedTargetSource } from "../../../../store/currencyInputReducer";
+import useConvertCurrency from "../../../../hooks/useConvertCurrency";
 
 function ExchangeControls() {
   const dispatch = useDispatch();
@@ -13,6 +14,8 @@ function ExchangeControls() {
 
   const { currencyList, exchangeRates, loadingCurrencyData } = useSelector((state) => state.currencyDataState);
   const { selectedSource, selectedTargetSource } = useSelector((state) => state.currencyInputState);
+
+  const convertCurrency = useConvertCurrency();
 
   const handleSelectSource = (source) => {
     if (!source) return;
@@ -24,29 +27,25 @@ function ExchangeControls() {
     dispatch(setSelectedTargetSource(source));
   };
 
-  useEffect(() => {
-    console.log(exchangeRates);
-    console.log(currencyList);
-  }, [exchangeRates, currencyList]);
-
   const handleSourceAmountChange = useCallback(
     (value) => {
       setSourceValue(value);
-      console.log("source value change");
 
       // Also update target currency value
       if (isNaN(value)) value = 0;
       if (selectedSource == selectedTargetSource) {
         setTargetValue(value);
       } else {
-        const sourceRate = exchangeRates[`USD${selectedSource}`] || 1;
-        const targetRate = exchangeRates[`USD${selectedTargetSource}`] || 1;
-        const convertedValue = value / sourceRate;
+        const convertedValue = convertCurrency({
+          from: selectedSource,
+          to: selectedTargetSource,
+          amount: value,
+        });
 
-        setTargetValue(convertedValue * targetRate);
+        setTargetValue(convertedValue);
       }
     },
-    [exchangeRates, selectedSource, selectedTargetSource]
+    [convertCurrency, selectedSource, selectedTargetSource]
   );
 
   const handleTargetAmountChange = useCallback(
@@ -58,16 +57,18 @@ function ExchangeControls() {
       if (selectedSource == selectedTargetSource) {
         setSourceValue(value);
       } else {
-        const sourceRate = exchangeRates[`USD${selectedSource}`] || 1;
-        const targetRate = exchangeRates[`USD${selectedTargetSource}`] || 1;
-        const convertedValue = value * sourceRate;
-
-        setSourceValue(convertedValue / targetRate);
+        const convertedValue = convertCurrency({
+          from: selectedTargetSource,
+          to: selectedSource,
+          amount: value,
+        });
+        setSourceValue(convertedValue);
       }
     },
-    [exchangeRates, selectedSource, selectedTargetSource]
+    [convertCurrency, selectedSource, selectedTargetSource]
   );
 
+  // Update target currency value when currency unit change + on Initial render
   useEffect(() => {
     handleSourceAmountChange(sourceValue);
   }, [handleSourceAmountChange]);

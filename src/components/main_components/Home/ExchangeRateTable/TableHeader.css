@@ -1,0 +1,7 @@
+.TableHeader {
+  margin-bottom: 1rem;
+}
+.TableHeader > h2 {
+  color: var(--gray-800);
+  font-size: 1.3rem;
+}

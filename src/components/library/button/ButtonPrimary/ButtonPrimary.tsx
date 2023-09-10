@@ -1,7 +1,9 @@
 import React from "react";
+import "./ButtonPrimary.css";
 
 interface Props {
   loading: boolean;
+  children: React.ReactNode;
 }
 
 function ButtonPrimary(props: React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & Props) {
@@ -9,7 +11,7 @@ function ButtonPrimary(props: React.DetailedHTMLProps<React.ButtonHTMLAttributes
     <button
       {...props}
       className="ButtonPrimary">
-      ButtonPrimary
+      {props.children}
     </button>
   );
 }

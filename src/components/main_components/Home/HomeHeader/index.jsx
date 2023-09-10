@@ -1,6 +1,6 @@
 import React from "react";
 import "./HomeHeader.css";
-import SectionPrimary from "../../../library/section/SectionPrimary";
+import SectionPrimary from "../../../library/section/SectionPrimary/SectionPrimary";
 
 function HomeHeader() {
   return (
