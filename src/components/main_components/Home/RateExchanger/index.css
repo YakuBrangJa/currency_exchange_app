@@ -2,4 +2,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
+  height: 14rem;
+}
+
+@media (max-width: 690px) {
+  .RateExchanger {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.2rem;
+    height: auto;
+  }
 }

@@ -11,11 +11,33 @@ export interface NumberInputSelectBoxProps {
   amount: number;
   handleSelectSource: (value: string) => void;
   amountChangeHandler: (value: number) => void;
+  loading: boolean;
+  config?: {
+    partitionStyle: "full" | "partial";
+    size: "small" | "normal" | "large";
+    reverse: boolean;
+    fullWidth: boolean;
+  };
 }
 
-export function NumberInputSelectBox({ currencyList, selectedCurrency, handleSelectSource, amount, amountChangeHandler }: NumberInputSelectBoxProps) {
+export function NumberInputSelectBox({
+  currencyList,
+  selectedCurrency,
+  handleSelectSource,
+  amount,
+  amountChangeHandler,
+  loading = false,
+  config = {
+    partitionStyle: "partial",
+    size: "large",
+    reverse: false,
+    fullWidth: false,
+  },
+}: NumberInputSelectBoxProps) {
+  const { partitionStyle, size, reverse, fullWidth, ...rest } = config;
+
   return (
-    <div className="CurrencySelect">
+    <div className={`CurrencySelect ${size} ${reverse ? "reverse" : ""}`}>
       <input
         type="number"
         className="CurrencySelect_numberInput"
@@ -32,19 +54,25 @@ export function NumberInputSelectBox({ currencyList, selectedCurrency, handleSel
           }
         }}
       />
-      <div className="CurrencySelect_vt"></div>
+      <div className={`CurrencySelect_partition ${partitionStyle}`}></div>
       <Select
         value={selectedCurrency}
         onValueChange={(value) => {
           console.log(value);
           handleSelectSource(value);
         }}>
-        <SelectTrigger className="CurrencySelect_selectTrigger">
-          <SelectValue
-            placeholder={selectedCurrency}
-            className="CurrencySelect_selectValue"
-          />
-          <AiFillCaretDown className="icon" />
+        <SelectTrigger className={`CurrencySelect_selectTrigger ${size} ${reverse ? "space_between" : ""}`}>
+          {loading ? (
+            <p className="CurrencySelect_loading">Loading...</p>
+          ) : (
+            <>
+              <SelectValue
+                placeholder={selectedCurrency}
+                className="CurrencySelect_selectValue"
+              />
+              <AiFillCaretDown className="icon" />
+            </>
+          )}
         </SelectTrigger>
         {currencyList && (
           <SelectContent className="CurrencySelect_selectContent">

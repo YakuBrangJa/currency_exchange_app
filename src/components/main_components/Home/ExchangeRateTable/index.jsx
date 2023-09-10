@@ -7,7 +7,7 @@ import TableBody from "./TableBody";
 
 function ExchangeRateTable() {
   return (
-    <SectionPrimary>
+    <SectionPrimary className="ExchangeRateTable">
       <TableHeader />
       <TableControls />
       <TableBody />

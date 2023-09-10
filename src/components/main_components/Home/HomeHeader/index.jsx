@@ -5,7 +5,7 @@ import SectionPrimary from "../../../library/section/SectionPrimary/SectionPrima
 function HomeHeader() {
   return (
     <SectionPrimary>
-      <h1 className="HomeHeader_h1">Currency Rate Converter</h1>
+      <h1 className="HomeHeader_h1">Currency Converter</h1>
     </SectionPrimary>
   );
 }

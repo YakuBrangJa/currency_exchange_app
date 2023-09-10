@@ -1,7 +1,7 @@
 .ButtonPrimary {
   border: none;
-  padding: 0.6rem;
-  /* height: 2.5rem; */
+  padding: 0 0.7rem;
+  height: 3rem;
   border-radius: 0.2rem;
   background-color: var(--blue-600);
   color: var(--gray-100);

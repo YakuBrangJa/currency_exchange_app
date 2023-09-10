@@ -6,13 +6,28 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.2rem 1rem 0.3rem;
+  height: 3.1rem;
+  padding: 0 1.2rem 0 0.3rem;
   font-weight: 600;
 }
 
+.TableBodyHeader .left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.TableBodyHeader .left .search {
+  display: none;
+}
+
+.TableBodyHeader .left > .icon {
+  display: none;
+}
+
 .TableBodyListContainer {
-  max-height: 30rem;
+  height: 30rem;
   border-bottom: 0.5px solid var(--gray-400);
+  padding: 0.3rem 0;
 }
 
 .TableBodyListItem {
@@ -34,4 +49,31 @@
 
 .TableBodyListItem > .currencyLabel .fullLabel {
   color: var(--gray-500);
+}
+
+.TableBodyListItem > .rate {
+  /* color: var(--gray-700); */
+  color: var(--blue-600);
+}
+
+.TableLoading {
+  height: 29rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-500);
+}
+
+@media (max-width: 690px) {
+  .TableBodyHeader {
+    padding: 0 0.9rem 0 0rem;
+  }
+
+  .TableBodyHeader .left > .icon {
+    display: block;
+  }
+
+  .TableBodyHeader .left .search {
+    display: block;
+  }
 }

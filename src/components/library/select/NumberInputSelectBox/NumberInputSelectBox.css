@@ -6,10 +6,18 @@
   border: 0.5px solid var(--gray-400);
   width: fit-content;
   overflow: hidden;
+  /* width: full; */
+  /* flex: 1; */
+}
+.CurrencySelect.reverse {
+  flex-direction: row-reverse;
 }
 
 .CurrencySelect:hover {
   border: 0.5px solid var(--gray-500);
+}
+.CurrencySelect.normal {
+  height: 2.5rem;
 }
 
 .CurrencySelect_numberInput {
@@ -20,13 +28,27 @@
   background: none;
   font-size: 1rem;
   width: 8rem;
+  /* max-width: 8rem; */
+  /* flex: 8; */
 }
 
-.CurrencySelect_vt {
+.CurrencySelect_partition {
   align-self: center;
   width: 0;
-  height: 60%;
+}
+
+.CurrencySelect_partition.partial {
   border-left: 0.5px solid var(--gray-300);
+  height: 60%;
+}
+.CurrencySelect_partition.full {
+  height: 100%;
+  border-left: 0.5px solid var(--gray-400);
+}
+
+.CurrencySelect_loading {
+  font-size: 0.9rem;
+  color: var(--gray-500);
 }
 
 .CurrencySelect_selectTrigger {
@@ -34,10 +56,13 @@
   align-items: center;
   justify-content: flex-end;
   gap: 0.3rem;
-  padding: 0 0.5rem;
-  height: 3rem;
+  padding: 0 0.5rem 0 0.6rem;
+  /* height: 3rem; */
+  height: 100%;
   border-radius: 0.3rem;
+  /* max-width: 12rem; */
   width: 12rem;
+  flex: 12;
   color: var(--gray-800);
   overflow: hidden;
   /* white-space: nowrap; */
@@ -45,9 +70,13 @@
   /* border: 0.5px solid var(--gray-400); */
 }
 
+.CurrencySelect_selectTrigger.space_between {
+  justify-content: space-between;
+}
+
 .CurrencySelect_selectTrigger > span {
   display: block;
-  max-width: 90%;
+  max-width: 89%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -68,6 +97,10 @@
   color: var(--gray-700);
 }
 
+.CurrencySelect_selectTrigger.normal > span {
+  font-size: 0.9rem;
+}
+
 .CurrencySelect_selectContent {
   margin: 0.3rem 0;
   width: 15rem;
@@ -76,8 +109,9 @@
   background-color: var(--gray-50);
   box-shadow: 0px 3px 10px -5px rgba(0, 0, 0, 0.15);
   padding: 0.1rem;
-  max-height: 20rem;
+  max-height: 17rem;
   overflow-y: overlay;
+  border: 0.5px solid var(--gray-300);
 }
 
 .CurrencySelect_selectItem {
@@ -104,4 +138,21 @@
   background-color: var(--gray-200);
   cursor: pointer;
   color: var(--gray-800);
+}
+
+@media (max-width: 690px) {
+  .CurrencySelect {
+    width: 100%;
+  }
+
+  .CurrencySelect_numberInput {
+    flex: 1;
+    min-width: 8rem;
+  }
+
+  .CurrencySelect_selectTrigger,
+  .CurrencySelect_selectTrigger.CurrencySelect_selectTrigger.space_between {
+    flex: 2;
+    width: auto;
+  }
 }

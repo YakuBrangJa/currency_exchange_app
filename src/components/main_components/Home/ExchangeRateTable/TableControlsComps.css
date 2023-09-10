@@ -1,4 +1,4 @@
-.TableContainer {
+.TableControlsContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6,6 +6,8 @@
 }
 
 .TableControlLeft {
+  flex: 1;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -18,4 +20,18 @@
 }
 
 .TableControlRight {
+}
+
+@media (max-width: 690px) {
+  .TableControlsContainer {
+    margin-bottom: 0.5rem;
+  }
+
+  .TableCurrencyInput {
+    width: 100%;
+  }
+
+  .TableSearchBox {
+    display: none;
+  }
 }

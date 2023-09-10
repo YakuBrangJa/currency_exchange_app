@@ -5,6 +5,7 @@ const currencyTableInputSlice = createSlice({
   initialState: {
     baseValue: 1,
     selectedBaseCurrency: "USD",
+    currencySearchValue: "",
   },
 
   reducers: {
@@ -14,8 +15,11 @@ const currencyTableInputSlice = createSlice({
     setSelectedBaseCurrency: (state, action) => {
       state.selectedBaseCurrency = action.payload;
     },
+    setCurrencySearchValue: (state, action) => {
+      state.currencySearchValue = action.payload;
+    },
   },
 });
 
-export const { setBaseValue, setSelectedBaseCurrency } = currencyTableInputSlice.actions;
+export const { setBaseValue, setSelectedBaseCurrency, setCurrencySearchValue } = currencyTableInputSlice.actions;
 export default currencyTableInputSlice.reducer;

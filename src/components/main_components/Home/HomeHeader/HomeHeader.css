@@ -3,7 +3,19 @@
 }
 
 .HomeHeader_h1 {
-  color: var(--gray-500);
+  color: var(--gray-700);
   font-size: 2rem;
   margin: auto;
+  text-align: center;
+}
+
+@media (max-width: 380px) {
+  .HomeHeader_h1 {
+    font-size: 1.7rem;
+  }
+}
+@media (max-width: 290px) {
+  .HomeHeader_h1 {
+    font-size: 1.4rem;
+  }
 }

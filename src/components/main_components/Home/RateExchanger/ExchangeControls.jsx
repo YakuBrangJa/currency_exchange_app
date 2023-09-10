@@ -12,7 +12,7 @@ function ExchangeControls() {
   const [sourceValue, setSourceValue] = useState(1);
   const [targetValue, setTargetValue] = useState(0);
 
-  const { currencyList, exchangeRates, loadingCurrencyData } = useSelector((state) => state.currencyDataState);
+  const { currencyList, loadingCurrencyData } = useSelector((state) => state.currencyDataState);
   const { selectedSource, selectedTargetSource } = useSelector((state) => state.currencyInputState);
 
   const convertCurrency = useConvertCurrency();
@@ -81,6 +81,7 @@ function ExchangeControls() {
         handleSelectSource={handleSelectSource}
         amount={sourceValue}
         amountChangeHandler={handleSourceAmountChange}
+        loading={loadingCurrencyData}
       />
       <LuArrowDownUp className="icon" />
       <CurrencyInput
@@ -89,6 +90,7 @@ function ExchangeControls() {
         handleSelectSource={handleSelectTargetSource}
         amount={targetValue}
         amountChangeHandler={handleTargetAmountChange}
+        loading={loadingCurrencyData}
       />
     </ExchangeControlContainer>
   );

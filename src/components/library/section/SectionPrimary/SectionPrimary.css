@@ -8,3 +8,9 @@
   /* box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.15); */
   /* box-shadow: 0px 6px 12px -4px rgba(0, 0, 0, 0.15); */
 }
+
+@media (max-width: 450px) {
+  .SectionPrimary {
+    padding: 1.8rem 1.7rem;
+  }
+}

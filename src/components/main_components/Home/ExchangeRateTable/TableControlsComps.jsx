@@ -1,8 +1,9 @@
+import SearchBoxPrimary from "../../../library/search/SearchBoxPrimary/SearchBoxPrimary";
 import { NumberInputSelectBox } from "../../../library/select/NumberInputSelectBox/NumberInputSelectBox";
 import "./TableControlsComps.css";
 
-export function TableContainer({ children }) {
-  return <div className="TableContainer">{children}</div>;
+export function TableControlsContainer({ children }) {
+  return <div className="TableControlsContainer">{children}</div>;
 }
 
 export function TableControlLeft({ children }) {
@@ -13,11 +14,22 @@ export function TableControlRight({ children }) {
   return <div className="TableControlRight">{children}</div>;
 }
 
+export function TableSearchBox(props) {
+  return (
+    <div className="TableSearchBox">
+      <SearchBoxPrimary {...props} />
+    </div>
+  );
+}
+
 export function TableCurrencyInput(props) {
   return (
     <div className="TableCurrencyInput">
       {/* <label>Base currency</label> */}
-      <NumberInputSelectBox {...props} />
+      <NumberInputSelectBox
+        {...props}
+        config={{ partitionStyle: "full", reverse: true, size: "normal" }}
+      />
     </div>
   );
 }

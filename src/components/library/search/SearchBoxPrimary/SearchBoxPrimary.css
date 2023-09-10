@@ -1,0 +1,58 @@
+.SearchBoxPrimary {
+  position: relative;
+}
+
+.SearchBoxPrimary > input[type="search"] {
+  height: 3rem;
+  border-radius: 0.3rem;
+  border: 0.5px solid var(--gray-400);
+  padding: 0 0.65rem;
+  font-size: 1rem;
+}
+
+.SearchBoxPrimary > input[type="search"]:focus,
+.SearchBoxPrimary > input[type="search"]:hover {
+  border-color: var(--blue-500);
+}
+.SearchBoxPrimary > input[type="search"]:focus,
+.SearchBoxPrimary > input[type="search"]:active {
+  outline: 0.5px solid var(--blue-500);
+}
+
+.SearchBoxPrimary > .icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 1rem;
+  font-size: 1.2rem;
+  color: var(--gray-600);
+}
+.SearchBoxPrimary > input[type="search"]:focus ~ .icon,
+.SearchBoxPrimary > input[type="search"]:active ~ .icon {
+  color: var(--blue-600);
+}
+
+.SearchBoxPrimary {
+  font-size: 0.9rem;
+}
+
+.SearchBoxPrimary.normal > input[type="search"] {
+  height: 2.5rem;
+}
+.SearchBoxPrimary.small > input[type="search"] {
+  height: 2.2rem;
+}
+
+.SearchBoxPrimary.normal > .icon {
+  right: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.SearchBoxPrimary.full {
+  width: 100%;
+}
+
+.SearchBoxPrimary.full > input[type="search"] {
+  width: 100%;
+}

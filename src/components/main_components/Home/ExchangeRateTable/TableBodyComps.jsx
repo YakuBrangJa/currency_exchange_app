@@ -1,14 +1,49 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./TableBodyComps.css";
+import LoadingSpinnerPrimary from "../../../library/loading_spinner/LoadingSpinnerPrimary/LoadingSpinnerPrimary";
+import { BsSearch } from "react-icons/bs";
+import IconButtonSecondary from "../../../library/button/IconButtonSecondary/IconButtonSecondary";
+import SearchBoxPrimary from "../../../library/search/SearchBoxPrimary/SearchBoxPrimary";
+import { setCurrencySearchValue } from "../../../../store/currencyTableInputReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 export function TableBodyContainer({ children }) {
   return <div className="TableBodyContainer">{children}</div>;
 }
 
 export function TableBodyHeader() {
+  const dispatch = useDispatch();
+  const currencySearchValue = useSelector((state) => state.currencyTableInputState.currencySearchValue);
+
+  const [showSearchBox, setShowSearchBox] = useState(false);
+
+  const handleSearchCurrency = (value) => {
+    dispatch(setCurrencySearchValue(value));
+  };
+
   return (
     <div className="TableBodyHeader">
-      <span className="left">Currency</span>
+      <div className="left">
+        {!showSearchBox && <span className="">Currency</span>}
+        <span className="search">
+          {showSearchBox ? (
+            <SearchBoxPrimary
+              placeholder="Search currencies"
+              value={currencySearchValue}
+              onChange={(e) => handleSearchCurrency(e.target.value)}
+              config={{ size: "small" }}
+              onBlur={() => setShowSearchBox(false)}
+              autoFocus
+            />
+          ) : (
+            <IconButtonSecondary
+              config={{ size: "small" }}
+              onClick={() => setShowSearchBox(true)}>
+              <BsSearch className="icon" />
+            </IconButtonSecondary>
+          )}
+        </span>
+      </div>
       <span className="right">Rate</span>
     </div>
   );
@@ -27,7 +62,15 @@ export function TableBodyListItem({ label, rateValue }) {
         <span className="unit">{label.unit}</span>
         {label.full && <span className="fullLabel"> - {label.full}</span>}
       </div>
-      <span>{rateValue}</span>
+      <span className="rate">{rateValue}</span>
     </li>
+  );
+}
+
+export function TableLoading() {
+  return (
+    <div className="TableLoading">
+      <LoadingSpinnerPrimary size={1.8} />
+    </div>
   );
 }

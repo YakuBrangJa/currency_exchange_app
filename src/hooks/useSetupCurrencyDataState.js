@@ -16,7 +16,7 @@ function useSetupCurrencyDataState() {
     setLoadingExchangeRates(true);
     delayAPICallTimeout.current = setTimeout(() => {
       getExchangeRate();
-    }, 2000);
+    }, 1800);
 
     return () => {
       if (delayAPICallTimeout.current !== null) {

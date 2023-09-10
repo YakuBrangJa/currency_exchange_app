@@ -1,9 +1,9 @@
 import React from "react";
-import "./RenderRateSummary.css";
+import "./ExchangeSummary.css";
 import { useSelector } from "react-redux";
 import { calculatePropotionalRelation } from "../../../../utils/calculatePropotionalRelation";
 
-function RenderRateSummary() {
+function ExchangeSummary() {
   const { selectedSource, selectedTargetSource } = useSelector((state) => state.currencyInputState);
 
   const { currencyList, exchangeRates } = useSelector((state) => state.currencyDataState);
@@ -16,7 +16,8 @@ function RenderRateSummary() {
   const sourceExchangeRate = calculatePropotionalRelation(baseTargetExchangeRate, baseSourceExchangeRate, 1);
 
   return (
-    <div className="RenderRateSummary">
+    <div className="ExchangeSummary">
+      <h2>Exchange Rate</h2>
       <div className="targetExchangeRate">
         <p className="baseValue">
           <span>1 </span>
@@ -41,4 +42,4 @@ function RenderRateSummary() {
   );
 }
 
-export default RenderRateSummary;
+export default ExchangeSummary;

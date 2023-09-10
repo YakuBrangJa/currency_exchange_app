@@ -8,6 +8,15 @@
 }
 
 .ExchangeControlContainer > .icon {
-  color: var(--green-500);
+  color: var(--green-600);
   flex-shrink: 0;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 690px) {
+  .ExchangeControlContainer {
+    /* align-items: stretch; */
+    /* flex-direction: row; */
+    /* align-self: center; */
+  }
 }
