@@ -14,3 +14,9 @@
     padding: 1.8rem 1.7rem;
   }
 }
+
+@media (max-width: 290px) {
+  .SectionPrimary {
+    padding: 1.4rem 1rem;
+  }
+}

@@ -1,46 +1,40 @@
-import React, { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import React, { useCallback, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import useGetCurrencyList from "./useGetCurrencyList";
 import useGetExchangeRateData from "./useGetExchangeRateData";
-import { setCurrencyList, setExchangeRates, setLoadingCurrencyData } from "../store/CurrencyDataReducer";
+import { setLoadingExchangeRateData } from "../store/CurrencyDataReducer";
 
-function useSetupCurrencyDataState() {
+function useSetupCurrencyDataState(config = { mode: "auto" }) {
   const dispatch = useDispatch();
-  const { currencyList, loading: loadingCurrencyList } = useGetCurrencyList();
-  const { getExchangeRate, exchangeRates, loading: loadingExchangeRates, setLoading: setLoadingExchangeRates } = useGetExchangeRateData();
+  const { getCurrencyList } = useGetCurrencyList({ mode: "manual" });
+  const { getExchangeRate } = useGetExchangeRateData({ mode: "manual" });
 
-  const delayAPICallTimeout = useRef();
-  useEffect(() => {
-    // ! Intentionally delaying live exchange rate API call, as free version has rate limitation
-    // If you are using subscription access key, you can call getExchangeRate() directly
-    setLoadingExchangeRates(true);
-    delayAPICallTimeout.current = setTimeout(() => {
+  const apiCallTimeout = useRef();
+
+  const fetchAndStoreCurrencyData = useCallback(() => {
+    getCurrencyList();
+
+    // ! Intentionally delaying apart getExchangeRate() call with getCurrencyList(), as free version has api request rate limitation
+    // If you are using subscription access key, you can call getExchangeRate() directly without setTimeout delay
+    dispatch(setLoadingExchangeRateData(true));
+    apiCallTimeout.current = setTimeout(() => {
       getExchangeRate();
-    }, 1800);
+    }, 1500);
 
     return () => {
-      if (delayAPICallTimeout.current !== null) {
-        clearTimeout(delayAPICallTimeout.current);
+      if (apiCallTimeout.current !== null) {
+        clearTimeout(apiCallTimeout.current);
       }
     };
-  }, []);
+  }, [apiCallTimeout]);
 
-  // setting store currency list
   useEffect(() => {
-    dispatch(setCurrencyList(currencyList));
-  }, [currencyList]);
+    if (config.mode === "auto") fetchAndStoreCurrencyData();
+  }, [fetchAndStoreCurrencyData, config.mode]);
 
-  // setting store exchange rate list
-  useEffect(() => {
-    dispatch(setExchangeRates(exchangeRates));
-  }, [exchangeRates]);
-
-  // setting currency data fetching state
-  useEffect(() => {
-    dispatch(setLoadingCurrencyData(loadingCurrencyList || loadingExchangeRates));
-  }, [loadingCurrencyList, loadingExchangeRates]);
-
-  return {};
+  return {
+    fetchAndStoreCurrencyData,
+  };
 }
 
 export default useSetupCurrencyDataState;

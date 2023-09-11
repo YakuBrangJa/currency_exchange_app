@@ -83,6 +83,7 @@
 }
 .CurrencySelect_selectTrigger .icon {
   color: var(--gray-500);
+  flex-shrink: 0;
 }
 
 .CurrencySelect_selectTrigger .unit {
@@ -103,13 +104,13 @@
 
 .CurrencySelect_selectContent {
   margin: 0.3rem 0;
-  width: 15rem;
+  /* width: 15rem;
+  max-height: 17rem; */
   border: 0.5px solid var(--gray-200);
   border-radius: 0.3rem;
   background-color: var(--gray-50);
   box-shadow: 0px 3px 10px -5px rgba(0, 0, 0, 0.15);
-  padding: 0.1rem;
-  max-height: 17rem;
+  padding: 0.2rem;
   overflow-y: overlay;
   border: 0.5px solid var(--gray-300);
 }
@@ -124,6 +125,7 @@
   /* text-align: end; */
   padding: 0.3rem 0.5rem;
   color: var(--gray-800);
+  border-radius: 0.2rem;
 }
 
 .CurrencySelect_selectItem .fullLabel {
@@ -134,10 +136,20 @@
 .CurrencySelect_selectItem:hover {
   border: none;
   outline: none;
-  border-radius: 0.2rem;
   background-color: var(--gray-200);
   cursor: pointer;
   color: var(--gray-800);
+}
+
+.CurrencySelect_selectItem[data-state="checked"],
+.CurrencySelect_selectItem[data-state="checked"]:focus,
+.CurrencySelect_selectItem[data-state="checked"]:hover {
+  background-color: var(--blue-500);
+  color: white;
+}
+
+.CurrencySelect_selectItem[data-state="checked"] .fullLabel {
+  color: white;
 }
 
 @media (max-width: 690px) {

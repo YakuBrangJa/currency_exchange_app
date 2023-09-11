@@ -6,3 +6,8 @@
   /* width: 10rem; */
   /* width: 100%; */
 }
+.SelectBox_ScrollViewport {
+  width: 15rem;
+  height: 40vh;
+  max-height: 17rem;
+}

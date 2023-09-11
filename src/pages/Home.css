@@ -4,7 +4,9 @@
   background-color: var(--gray-50);
   margin: 0;
   padding: 2rem 1rem;
+  overflow-x: hidden;
   overflow-y: scroll;
+  overflow-y: overlay;
 }
 @media (max-width: 820px) {
   .Home {

@@ -1,0 +1,8 @@
+.RateExchangerErrorPanel {
+  width: full;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  height: 12rem;
+}

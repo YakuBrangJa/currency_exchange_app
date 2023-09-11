@@ -6,6 +6,8 @@ const currencyDataSlice = createSlice({
     currencyList: [],
     exchangeRates: [],
     loadingCurrencyData: false,
+    loadingExchangeRateData: false,
+    errors: {},
   },
 
   reducers: {
@@ -20,8 +22,21 @@ const currencyDataSlice = createSlice({
     setLoadingCurrencyData: (state, action) => {
       state.loadingCurrencyData = action.payload;
     },
+
+    setLoadingExchangeRateData: (state, action) => {
+      state.loadingExchangeRateData = action.payload;
+    },
+
+    setError: (state, action) => {
+      state.errors = {};
+    },
+
+    setNewError: (state, action) => {
+      // state.errors.push(action.payload);
+      state.errors[action.payload.actionLabel] = action.payload;
+    },
   },
 });
 
-export const { setCurrencyList, setExchangeRates, setLoadingCurrencyData } = currencyDataSlice.actions;
+export const { setCurrencyList, setExchangeRates, setLoadingCurrencyData, setLoadingExchangeRateData, setNewError, setError } = currencyDataSlice.actions;
 export default currencyDataSlice.reducer;

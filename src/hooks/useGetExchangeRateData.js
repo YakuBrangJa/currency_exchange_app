@@ -1,30 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { ACCESS_KEY, axiosExchangeRateAPI } from "../libs/axios";
+import { setExchangeRates, setLoadingExchangeRateData, setNewError } from "../store/CurrencyDataReducer";
+import { useDispatch } from "react-redux";
 
-function useGetExchangeRateData(source = null) {
-  const [exchangeRates, setExchangeRates] = useState([]);
-  const [loading, setLoading] = useState(false);
+function useGetExchangeRateData(config = { mode: "auto" }) {
+  const dispatch = useDispatch();
+  // const [exchangeRates, setExchangeRates] = useState([]);
 
-  const getExchangeRate = async (source) => {
+  const getExchangeRate = async () => {
     try {
-      setLoading(true);
+      dispatch(setLoadingExchangeRateData(true));
       const response = await axiosExchangeRateAPI(`live?access_key=${ACCESS_KEY}`);
       console.log(response);
-      if (response.data.error) return;
+      if (response.data.error) {
+        console.error(response.data.error.info);
+        throw response.data.error;
+      }
 
-      setExchangeRates(response?.data?.quotes);
+      dispatch(setExchangeRates(response?.data?.quotes));
+      return response.data;
     } catch (e) {
-      console.log(e);
+      console.error(e);
+      dispatch(
+        setNewError({
+          actionLabel: "getExchangeRate",
+          error: e,
+        })
+      );
+      return e;
     } finally {
-      setLoading(false);
+      dispatch(setLoadingExchangeRateData(false));
     }
   };
 
   useEffect(() => {
-    if (source) getExchangeRate();
-  }, [source]);
+    if (config.mode === "auto") getExchangeRate();
+  }, [config.mode]);
 
-  return { getExchangeRate, exchangeRates, loading, setLoading };
+  return { getExchangeRate };
 }
 
 export default useGetExchangeRateData;

@@ -1,0 +1,42 @@
+.ScrollArea_Root {
+  position: relative;
+  /* overflow: scroll; */
+  /* overflow: overlay; */
+  overflow: hidden;
+}
+
+.ScrollArea_Viewport {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.2rem;
+}
+
+.ScrollBar_Bar {
+  display: flex;
+  touch-action: none;
+  user-select: none;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.ScrollBar_Bar.vertical {
+  height: 100%;
+  width: 0.5rem;
+  border-left: 1px solid transparent;
+}
+
+.ScrollBar_Bar.horizontal {
+  height: 0.5rem;
+  width: 100%;
+  border-top: 1px solild transparent;
+}
+
+/* relative flex-1 rounded-full bg-border */
+.ScrollBar_Thumb {
+  position: relative;
+  flex: 1;
+  border-radius: 0.2rem;
+  /* background-clip: border-box; */
+  background-color: var(--gray-400);
+}

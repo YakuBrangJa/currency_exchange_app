@@ -6,13 +6,19 @@ import SectionPrimary from "../../../library/section/SectionPrimary/SectionPrima
 import { useSelector } from "react-redux";
 import LoadingSpinnerPrimary from "../../../library/loading_spinner/LoadingSpinnerPrimary/LoadingSpinnerPrimary";
 import RateExchangerLoader from "./RateExchangerLoader";
+import RateExchangerErrorPanel from "./RateExchangerErrorPanel";
 
 function RateExchanger() {
-  const loadingCurrencyData = useSelector((state) => state.currencyDataState.loadingCurrencyData);
+  const { loadingCurrencyData, loadingExchangeRateData, errors } = useSelector((state) => state.currencyDataState);
+
+  const hasError = Object.keys(errors).length > 0;
+
   return (
     <SectionPrimary className="RateExchanger">
-      {loadingCurrencyData ? (
+      {loadingCurrencyData || loadingExchangeRateData ? (
         <RateExchangerLoader />
+      ) : hasError ? (
+        <RateExchangerErrorPanel />
       ) : (
         <>
           <ExchangeSummary />

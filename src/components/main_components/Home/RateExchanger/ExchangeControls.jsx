@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { CurrencyInput, ExchangeControlContainer } from "./ExchangeControlsComps";
+import "./ExchangeControls.css";
+
 import { LuArrowLeftRight, LuArrowDownUp } from "react-icons/lu";
-import useGetExchangeRateData from "../../../../hooks/useGetExchangeRateData";
-import useGetCurrencyList from "../../../../hooks/useGetCurrencyList";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedSource, setSelectedTargetSource } from "../../../../store/currencyInputReducer";
 import useConvertCurrency from "../../../../hooks/useConvertCurrency";
+import { NumberInputSelectBox } from "../../../library/select/NumberInputSelectBox/NumberInputSelectBox";
 
 function ExchangeControls() {
   const dispatch = useDispatch();
@@ -74,8 +74,8 @@ function ExchangeControls() {
   }, [handleSourceAmountChange]);
 
   return (
-    <ExchangeControlContainer>
-      <CurrencyInput
+    <div className="ExchangeControlContainer">
+      <NumberInputSelectBox
         currencyList={currencyList}
         selectedCurrency={selectedSource}
         handleSelectSource={handleSelectSource}
@@ -84,7 +84,7 @@ function ExchangeControls() {
         loading={loadingCurrencyData}
       />
       <LuArrowDownUp className="icon" />
-      <CurrencyInput
+      <NumberInputSelectBox
         currencyList={currencyList}
         selectedCurrency={selectedTargetSource}
         handleSelectSource={handleSelectTargetSource}
@@ -92,7 +92,7 @@ function ExchangeControls() {
         amountChangeHandler={handleTargetAmountChange}
         loading={loadingCurrencyData}
       />
-    </ExchangeControlContainer>
+    </div>
   );
 }
 

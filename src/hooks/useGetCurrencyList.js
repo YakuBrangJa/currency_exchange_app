@@ -1,30 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { ACCESS_KEY, axiosExchangeRateAPI } from "../libs/axios";
+import { useDispatch } from "react-redux";
+import { setCurrencyList, setLoadingCurrencyData, setNewError } from "../store/CurrencyDataReducer";
 
-function useGetCurrencyList() {
-  const [currencyList, setCurrencyList] = useState([]);
-  const [loading, setLoading] = useState(false);
+function useGetCurrencyList(config = { mode: "auto" }) {
+  const dispatch = useDispatch();
 
   const getCurrencyList = async () => {
     try {
-      setLoading(true);
+      dispatch(setLoadingCurrencyData(true));
+
       const response = await axiosExchangeRateAPI(`list?access_key=${ACCESS_KEY}`);
       console.log(response);
-      if (response.data.error) return;
+      if (response.data.error) {
+        console.error(response.data.error.info);
+        throw response.data.error;
+      }
 
-      setCurrencyList(response?.data?.currencies);
+      dispatch(setCurrencyList(response?.data?.currencies));
+      return response.data;
     } catch (e) {
-      console.log(e);
+      console.error(e);
+      dispatch(
+        setNewError({
+          actionLabel: "getCurrencyList",
+          error: e,
+        })
+      );
+      return e;
     } finally {
-      setLoading(false);
+      dispatch(setLoadingCurrencyData(false));
     }
   };
 
   useEffect(() => {
-    getCurrencyList();
-  }, []);
+    if (config.mode === "auto") getCurrencyList();
+  }, [config.mode]);
 
-  return { getCurrencyList, currencyList, loading };
+  return { getCurrencyList };
 }
 
 export default useGetCurrencyList;

@@ -6,6 +6,9 @@ import IconButtonSecondary from "../../../library/button/IconButtonSecondary/Ico
 import SearchBoxPrimary from "../../../library/search/SearchBoxPrimary/SearchBoxPrimary";
 import { setCurrencySearchValue } from "../../../../store/currencyTableInputReducer";
 import { useDispatch, useSelector } from "react-redux";
+import ErrorPanel from "../../../library/error_message/ErrorPanel";
+import useResolveApiError from "../../../../hooks/useResolveApiError";
+import useSetupCurrencyDataState from "../../../../hooks/useSetupCurrencyDataState";
 
 export function TableBodyContainer({ children }) {
   return <div className="TableBodyContainer">{children}</div>;
@@ -71,6 +74,15 @@ export function TableLoading() {
   return (
     <div className="TableLoading">
       <LoadingSpinnerPrimary size={1.8} />
+    </div>
+  );
+}
+
+export function TableErrorPanel() {
+  const { resolveApiError } = useResolveApiError();
+  return (
+    <div className="TableLoading">
+      <ErrorPanel errorResolveHandler={resolveApiError} />
     </div>
   );
 }

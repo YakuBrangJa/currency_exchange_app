@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { TableBodyContainer, TableBodyHeader, TableBodyListContainer, TableBodyListItem, TableLoading } from "./TableBodyComps";
+import { TableBodyContainer, TableBodyHeader, TableBodyListContainer, TableBodyListItem, TableErrorPanel, TableLoading } from "./TableBodyComps";
 import useConvertCurrency from "../../../../hooks/useConvertCurrency";
 
 function TableBody() {
-  const { currencyList, loadingCurrencyData } = useSelector((state) => state.currencyDataState);
+  const { currencyList, loadingCurrencyData, loadingExchangeRateData, errors } = useSelector((state) => state.currencyDataState);
   const { selectedBaseCurrency, baseValue, currencySearchValue } = useSelector((state) => state.currencyTableInputState);
   const [searchFilteredCurs, setSearchFilteredCurs] = useState([]);
+  const hasError = Object.keys(errors).length > 0;
 
   const convertCurrency = useConvertCurrency();
 
@@ -29,8 +30,10 @@ function TableBody() {
     <TableBodyContainer>
       <TableBodyHeader />
       <TableBodyListContainer>
-        {loadingCurrencyData ? (
+        {loadingCurrencyData || loadingExchangeRateData ? (
           <TableLoading />
+        ) : hasError ? (
+          <TableErrorPanel />
         ) : (
           <>
             {searchFilteredCurs.map((key) => {
