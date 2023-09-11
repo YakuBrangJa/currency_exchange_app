@@ -1,6 +1,6 @@
-#Currency Exchange App (Frontend Developer Test)
+# Currency Exchange App (Frontend Developer Test)
 
-###Repo Run Instruction
+### Repo Run Instruction
 
 - Clone this repo to local machine
 - Run -> npm install
